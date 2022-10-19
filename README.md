@@ -1,6 +1,6 @@
 # Website for R-Kurs - Analysis and Modeling of Complex Data Lab
 
-🔗 https://sta210-s22.github.io/website/
+🔗 https://josealanis.github.io/stats-website-template/
 
 ## Colors
 
