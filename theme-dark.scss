@@ -5,38 +5,40 @@
 $font-family: "Atkinson Hyperlegible", sans-serif;
 
 // Base document colors
-$body-bg: #181818;
-$body-color: white;
-$link-color: #75AADB;
+$body-bg:    #282a36;
+$body-color: #f8f8f2;
+$link-color: #8be9fd;
 
-$light: #525252;
+$light: #f8f8f2;
 
 // Navigation element colors
-$footer-bg: #181818;
-$navbar-bg: #303030;
-$sidebar-bg: #303030;
+$footer-bg:  #44475a;
+$navbar-bg:  #44475a;
+$sidebar-bg: #44475a;
 
 // Code blocks
 $code-block-bg-alpha: -.8;
+$code-bg: #44475a;
+$code-color: #8be9fd;
 
 // Bootstrap popovers
-$popover-bg: #242424;
+$popover-bg: #bd93f9;
 
 // Bootstrap inputs
-$input-bg: #242424;
+$input-bg:   #6272a4;
 
 
 /*-- scss:rules --*/
 
 .layout-example {
-  background: $gray-700;
+  background: $gray-600;
 }
 
 .render-commit-push {
   padding: 0.5em 0.5em 0em 3em;
   margin-top: 5px;
   margin-bottom: 5px;
-  background: #181818 5px center/3em no-repeat;
+  background: #282a36 5px center/3em no-repeat;
   border-top: 1px solid #adadad;
   border-bottom: 1px solid #adadad;
   background-image: url("images/render-commit-push.png");
@@ -48,7 +50,7 @@ $input-bg: #242424;
   padding: 0.5em 0.5em 0em 3em;
   margin-top: 5px;
   margin-bottom: 5px;
-  background: #181818 5px center/3em no-repeat;
+  background: #282a36 5px center/3em no-repeat;
   border-top: 1px solid #adadad;
   border-bottom: 1px solid #adadad;
   background-image: url("images/pull.png");

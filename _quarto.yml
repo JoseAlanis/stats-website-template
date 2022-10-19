@@ -19,10 +19,10 @@ website:
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
     left: "&copy; Copyright 2022, Mine Çetinkaya-Rundel"
-    background: "#D9E3E4"
+    background: "#C1002A"
 
   sidebar:
-    background: "#D9E3E4"
+    background: "#C1002A"
     logo: "images/logo.png"
     pinned: true
     align: center
