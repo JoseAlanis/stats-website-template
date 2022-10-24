@@ -1183,6 +1183,41 @@
     "text": "Perform\n✍️ HW 3 - Logistic regression and log transformation\n⌨️ Lab 5 - General Social Survey\n\n\nBack to course schedule ⏎"
   },
   {
+    "objectID": "weeks/woche-1.html",
+    "href": "weeks/woche-1.html",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "",
+    "text": "José C. García Alanis\nAbteilung für Analyse und Modellierung komplexer Daten\nWallstraße 3, Raum 06-255\nD-55122 Mainz\njose.alanis at uni-mainz.de"
+  },
+  {
+    "objectID": "weeks/woche-1.html#organisatorisches-und-wichtige-infos",
+    "href": "weeks/woche-1.html#organisatorisches-und-wichtige-infos",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "Organisatorisches und wichtige Infos",
+    "text": "Organisatorisches und wichtige Infos\n\nTerminübersicht, Kurs-Ressourcen, wichtige Links.\n\n\nAllgemeine Materialien für das Seminar\n\nWichtige Informationen und Kursmaterialien werden auf die LMS/Moodle-Seite des Seminars veröffentlicht:\n\nLink zum Seminar auf LMS.\n\nWann: Montags von 10:15 - 11:45 Uhr (24.10.22 - Mo. 06.02.23).\nWo: CIP-Pool im Psychologischen Institut – 01 236 PC-Pool"
+  },
+  {
+    "objectID": "weeks/woche-1.html#inhalt-des-seminars",
+    "href": "weeks/woche-1.html#inhalt-des-seminars",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "Inhalt des Seminars",
+    "text": "Inhalt des Seminars\nMulti-Level Modelle (auch Mehrebenen-Modelle genannt) ermöglichen es, Daten zu analysieren, die sich hierarchisch übergeordneten Einheiten zuordnen lassen. Hier wird häufig von genesteten oder hierarchisch strukturierten/organisierten Daten gesprochen. Beispiele dafür sind Kinder, die unterschiedlichen Familien angehören, Mitarbeiter:innen verschiedener Abteilungen oder Patient:innen von unterschiedlichen Therapeut:innen oder Kliniken. Diese Gruppen haben alle eine Gemeinsamkeit: Ihre Mitglieder:innen lassen sich eindeutig einer Gruppe (und nur einer Gruppe) zuordnen.\nEin typisches Merkmal von hierarchisch strukturieren Daten ist, dass Daten innerhalb einer Gruppe ähnlicher zueinander sind als zu Daten anderer Gruppen. Dadurch ergeben sich häufig Unterschiede, die auf die Zugehörigkeit zu einer jeweiligen Gruppe zurückzuführen sind (z.B. unterschiedliche Therapieverläufe für unterschiedliche Störungsgruppen oder Performanzunterschiede zwischen Abteilungen).\nEin Vorteil von Multi-Level Modelle ist, dass sie die obengenannten Ählichkeitsmuster in hierarchisch organisierten Daten berücksichtigen. Somit können sie dafür eingesetzt werden, genauere und realitätsnähere Aussagen über den Effekt einer Maßnahme oder über die Beziehung zwischen Prädiktoren und Outcomes zu treffen. Am Ende des Seminars sollten Sie folgende Fragen beantworten können: Was sind hierarchisch strukturierte Daten und wie können diese erkannt werden? Welche Konsequenzen (in Sinne einer Modellspezifikation) bringen hierarchisch strukturierte Daten mit sich? Wie können Multi-Level Modelle in R spezifiziert werden und welche Arten von Modellen gibt es? Wie sind die Ergebnisse eines Multilevel-Modells zu interpretieren?"
+  },
+  {
+    "objectID": "weeks/woche-1.html#begleitendes-tutorium",
+    "href": "weeks/woche-1.html#begleitendes-tutorium",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "Begleitendes Tutorium",
+    "text": "Begleitendes Tutorium\nDas Seminar wird von einem Softwaretutorium begleitet, in dem Sie die Grundlagen des Umgangs mit der Statistiksoftware R sowie die Datenaufbereitung im tidyverse erlernen und einüben sollen. Aufbauend auf diesen Grundkenntnissen werden im Tutorium die Inhalte dieses Seminars besprochen und vertieft. D.h. das Tutorium behandelt explizit, die Inhalte des Seminars und ist im Besonderen für dieses Seminar konzipiert. Bitte melden Sie sich daher auch für das begleitende Tutorium an! Der erste Termin des Tutoriums am ist am 31.10.22. Das Tutorium findet während der ersten Hälfte des Semesters wöchentlich statt. Melden Sie sich bitte unbedingt vor der ersten Lehrveranstaltung selbstständig mit dem Passwort bunsen für den LMS-Kurs des Tutoriums an:\n\nLink zum Tutorium auf LMS.\n\nWir eine Reihe von Materialien zusammengestellt, um Ihnen den Einstieg in die Programmiersprache R zur erleichtern. Diese können Sie unter dem folgenden Link erreichen:\n\nR-Kurs-Buch von der Abteilung Analyse und Modellierung komplexer Daten: https://amd-lab.github.io/R-Kurs-Buch/"
+  },
+  {
+    "objectID": "weeks/woche-1.html#terminübersicht",
+    "href": "weeks/woche-1.html#terminübersicht",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "Terminübersicht",
+    "text": "Terminübersicht\n\n\n\nSitzung\nDatum\nInhalt\nAnmerkungen\n\n\n\n\n1\n24. Okt. 2022\nOrganisatorisches\n✍️ Eingangs-Assessment\n\n\n2\n31. Okt. 2022\nHierarchische Daten\n\n\n\n3\n07. Nov. 2022\n\n\n\n\n4\n14. Nov. 2022\n\n\n\n\n5\n21. Nov. 2022\n\n\n\n\n6\n28. Nov. 2022\n\n\n\n\n7\n05. Dez. 2022\n\n\n\n\n8\n12. Dez. 2022\n\n\n\n\n9\n19. Dez. 2022\n\n\n\n\n🎁\n🏡\n🎄\nWeihnachtspause\n\n\n10\n09. Jan. 2023\n\n\n\n\n11\n16. Jan. 2023\n\n\n\n\n12\n23. Jan. 2023\n\n\n\n\n13\n30. Jan. 2023\n\n\n\n\n14\n06. Feb. 2023"
+  },
+  {
     "objectID": "weeks/week-6.html",
     "href": "weeks/week-6.html",
     "title": "Week 6",
