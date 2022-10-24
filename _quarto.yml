@@ -75,10 +75,10 @@ website:
             text: Description
           - href: project-tips-resources.qmd
             text: Tips + resources
-      - section: "Weekly materials"
+      - section: "Wochentliche Sitzungen"
         contents:
-          - href: weeks/week-1.qmd
-            text: "Week 1"
+          - href: weeks/woche-1.qmd
+            text: "Woche 1"
           - href: weeks/week-2.qmd
             text: "Week 2"
           - href: weeks/week-3.qmd
