@@ -1187,7 +1187,14 @@
     "href": "weeks/woche-1.html",
     "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
     "section": "",
-    "text": "José C. García Alanis\nAbteilung für Analyse und Modellierung komplexer Daten\nWallstraße 3, Raum 06-255\nD-55122 Mainz\njose.alanis at uni-mainz.de"
+    "text": "\\[\n\\begin{aligned}\ny_{i, j, k} &=\\beta_0+S_{0, i}+\\beta_\\delta X_{i, j, k}+\\epsilon_{i, j, k}, \\\\\ni &=1, 2, \\ldots, I \\quad j=1,2, \\ldots, J \\quad k=1,2 \\\\\n\\boldsymbol{\\epsilon} & \\sim \\mathcal{N}\\left(0, \\sigma_\\epsilon^2\\right) \\\\\n\\boldsymbol{S}_{\\mathbf{0}} & \\sim \\mathcal{N}\\left(0, \\sigma_{S_0}^2\\right)\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "weeks/woche-1.html#leitung",
+    "href": "weeks/woche-1.html#leitung",
+    "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
+    "section": "Leitung",
+    "text": "Leitung\nJosé C. García Alanis\nAbteilung für Analyse und Modellierung komplexer Daten\nWallstraße 3, Raum 06-255\nD-55122 Mainz\njose.alanis at uni-mainz.de"
   },
   {
     "objectID": "weeks/woche-1.html#organisatorisches-und-wichtige-infos",
