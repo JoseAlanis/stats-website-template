@@ -159,10 +159,10 @@
     },
     "broom": {
       "Package": "broom",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c948329889c7b24a4201df3aef5058c2",
+      "Hash": "c90ff735b7812b60f067a3f7a3b4de63",
       "Requirements": [
         "backports",
         "dplyr",
@@ -206,10 +206,10 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.7.1",
+      "Version": "3.7.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2fda237f24bc56508f31394beaa56877",
+      "Hash": "358689cac9fe93b1bb3a19088d2dbed8",
       "Requirements": [
         "R6",
         "processx"
@@ -297,18 +297,18 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "4.3.2",
+      "Version": "4.3.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "022c42d49c28e95d69ca60446dbabf88",
+      "Hash": "0eb86baa62f06e8855258fa5a8048667",
       "Requirements": []
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.14.2",
+      "Version": "1.14.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "36b67b5adf57b292923f5659f5f0c853",
+      "Hash": "b9b912b41064aaa79270f24d123c887d",
       "Requirements": []
     },
     "dbplyr": {
@@ -840,10 +840,10 @@
     },
     "lava": {
       "Package": "lava",
-      "Version": "1.6.10",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4c31a28528978d8689145f5274ce9058",
+      "Hash": "e16a0d9c76a09b8cf161597cbdcee6a6",
       "Requirements": [
         "SQUAREM",
         "future.apply",
@@ -947,10 +947,10 @@
     },
     "modelr": {
       "Package": "modelr",
-      "Version": "0.1.8",
+      "Version": "0.1.9",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9fd59716311ee82cba83dc2826fc5577",
+      "Hash": "ce70fef14a09fd1cab1f3792a0e210c1",
       "Requirements": [
         "broom",
         "magrittr",
@@ -1000,10 +1000,10 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.0.2",
+      "Version": "2.0.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6d3bef2e305f55c705c674653c7d7d3d",
+      "Hash": "e86c5ffeb8474a9e03d75f5d2919683e",
       "Requirements": [
         "askpass"
       ]
@@ -1052,10 +1052,10 @@
     },
     "patchwork": {
       "Package": "patchwork",
-      "Version": "1.1.1",
+      "Version": "1.1.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c446b30cb33ec125ff02588b60660ccb",
+      "Hash": "63b611e9d909a9ed057639d9c3b77152",
       "Requirements": [
         "ggplot2",
         "gtable"
@@ -1202,10 +1202,10 @@
     },
     "recipes": {
       "Package": "recipes",
-      "Version": "1.0.1",
+      "Version": "1.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6ea4fdbc49ae227bf37eea030da5a995",
+      "Hash": "96e75f4be11b63fb92eae7d5c4f559b2",
       "Requirements": [
         "Matrix",
         "cli",
@@ -1304,10 +1304,10 @@
     },
     "rpart": {
       "Package": "rpart",
-      "Version": "4.1.16",
+      "Version": "4.1.19",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ea3ca1d9473daabb3cd0f1b4f974c1ed",
+      "Hash": "b3c892a81783376cc2204af0f5805a80",
       "Requirements": []
     },
     "rsample": {
@@ -1447,10 +1447,10 @@
     },
     "sys": {
       "Package": "sys",
-      "Version": "3.4",
+      "Version": "3.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b227d13e29222b4574486cfcbde077fa",
+      "Hash": "34c16f1ef796057bfa06d3f4ff818a5d",
       "Requirements": []
     },
     "tibble": {

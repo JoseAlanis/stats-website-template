@@ -4,12 +4,18 @@ cellar/
 lock/
 python/
 staging/
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
 
 /.quarto/
 _site/
 *.key
 *speaker.html
+
+# r stuff
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# jetbrains
+/.idea/modules.xml
+/.idea/stats-website-template.iml
