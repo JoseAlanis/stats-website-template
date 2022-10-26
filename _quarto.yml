@@ -3,22 +3,22 @@ project:
 
 website:
   page-navigation: true
-  title: "STA 210 - Spring 2022"
-  description: "Homepage for STA 210 - Regression Analysis at Duke University, Spring 2022."
-  site-url: "https://sta210-s22.github.io/website/"
+  title: "Fortgeschrittene statistische Methoden II"
+  description: "Homepage für 02.132.6110 Seminar: Fortgeschrittene statistische Methoden II in WiSe 22/23 an der JGU."
+  site-url: "https://josealanis.github.io/stats-website-template/"
 
-  repo-url: https://github.com/sta210-s22/website
+  repo-url: https://github.com/JoseAlanis/stats-website-template
   repo-actions: [edit, issue]
 
   open-graph: true
 
   twitter-card:
-    creator: "@minebocek"
+    creator: "@JoiAlhaniz"
     image: "images/twitter-card.png"
 
   page-footer:
     right: "This page is built with ❤️ and [Quarto](https://quarto.org/)."
-    left: "&copy; Copyright 2022, Mine Çetinkaya-Rundel"
+    left: "&copy; Copyright 2022, José C. García Alanis"
     background: "#C1002A"
 
   sidebar:
@@ -28,11 +28,11 @@ website:
     align: center
     tools:
       - icon: github
-        href: https://github.com/sta210-s22
+        href: https://github.com/JoseAlanis/stats-website-template
         text: "GitHub organization"
-      - icon: code-square
-        href: https://cmgr.oit.duke.edu/containers
-        text: "RStudio Containers"
+      - icon: journal-text
+        href: https://lms.uni-mainz.de/moodle/course/view.php?id=84393
+        text: "LMS/Moodle"
       - icon: person-fill
         text: "Sakai"
         menu:
@@ -55,8 +55,8 @@ website:
             text: Syllabus
           - href: course-support.qmd
             text: Support
-          - href: course-team.qmd
-            text: Teaching team
+#          - href: course-team.qmd
+#            text: Teaching team
           - href: index.qmd
             text: Schedule
           - href: course-links.qmd
@@ -83,34 +83,6 @@ website:
         contents:
           - href: weeks/woche-1.qmd
             text: "Woche 1"
-          - href: weeks/week-2.qmd
-            text: "Week 2"
-          - href: weeks/week-3.qmd
-            text: "Week 3"
-          - href: weeks/week-4.qmd
-            text: "Week 4"
-          - href: weeks/week-5.qmd
-            text: "Week 5"
-          - href: weeks/week-6.qmd
-            text: "Week 6"
-          - href: weeks/week-7.qmd
-            text: "Week 7"
-          - href: weeks/week-8.qmd
-            text: "Week 8"
-          - href: weeks/week-9.qmd
-            text: "Week 9"
-          - href: weeks/week-10.qmd
-            text: "Week 10"
-          - href: weeks/week-11.qmd
-            text: "Week 11"
-          - href: weeks/week-12.qmd
-            text: "Week 12"
-          - href: weeks/week-13.qmd
-            text: "Week 13"
-          - href: weeks/week-14.qmd
-            text: "Week 14"
-          - href: weeks/week-15.qmd
-            text: "Week 15"
       - section: "Supplemental notes"
         contents:
           - href: supplemental/slr-derivations.qmd
