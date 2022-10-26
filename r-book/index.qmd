@@ -1,10 +1,6 @@
 ---
 title: "Einführung in R"
-author: |
- José Carlos García Alanis, Jan Goettmann, Cordula Hunt,
- Florian Kobylka, Wanja Hemmerich, Christoph Löffler, Lisa RenzieHausen,
- Anna-Lena Schubert, and Meike Steinhilber
-
+author: José Carlos García Alanis, Jan Goettmann, Cordula Hunt, Florian Kobylka, Wanja Hemmerich, Christoph Löffler, Lisa RenzieHausen, Anna-Lena Schubert, and Meike Steinhilber
 date: "`r Sys.Date()`"
 ---
 
