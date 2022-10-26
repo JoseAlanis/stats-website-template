@@ -63,6 +63,10 @@ website:
             text: Useful links
           - href: course-faq.qmd
             text: FAQ
+      - section: "R-Kurs-Buch"
+        contents:
+          - href: r-book/index.qmd
+            text: Willkommen
       - section: "Computing"
         contents:
           - href: computing-access.qmd
