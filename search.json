@@ -242,7 +242,7 @@
     "href": "weeks/woche-1.html#terminübersicht",
     "title": "Multi-level Modelle – Woche 1 – 24.10.2022",
     "section": "Terminübersicht",
-    "text": "Terminübersicht\n\n\n\nSitzung\nDatum\nInhalt\nAnmerkungen\n\n\n\n\n1\n24. Okt. 2022\nOrganisatorisches\n✍️ Eingangs-Assessment\n\n\n2\n31. Okt. 2022\nHierarchische Daten\n\n\n\n3\n07. Nov. 2022\n\n\n\n\n4\n14. Nov. 2022\n\n\n\n\n5\n21. Nov. 2022\n\n\n\n\n6\n28. Nov. 2022\n\n\n\n\n7\n05. Dez. 2022\n\n\n\n\n8\n12. Dez. 2022\n\n\n\n\n9\n19. Dez. 2022\n\n\n\n\n🎁\n🏡\n🎄\nWeihnachtspause\n\n\n10\n09. Jan. 2023\n\n\n\n\n11\n16. Jan. 2023\n\n\n\n\n12\n23. Jan. 2023\n\n\n\n\n13\n30. Jan. 2023\n\n\n\n\n14\n06. Feb. 2023"
+    "text": "Terminübersicht\n\n\n\n\n\n\n\n\n\nSitzung\nDatum\nInhalt\nAnmerkungen\n\n\n\n\n1\n24. Okt. 2022\nOrganisatorisches\n✍️ Eingangs-Assessment\n\n\n2\n31. Okt. 2022\nHierarchische Daten\n\n\n\n3\n07. Nov. 2022\n\n\n\n\n4\n14. Nov. 2022\n\n\n\n\n5\n21. Nov. 2022\n\n\n\n\n6\n28. Nov. 2022\n\n\n\n\n7\n05. Dez. 2022\n\n\n\n\n8\n12. Dez. 2022\n\n\n\n\n9\n19. Dez. 2022\n\n\n\n\n🎁\n🏡\n🎄\nWeihnachtspause\n\n\n10\n09. Jan. 2023\n\n\n\n\n11\n16. Jan. 2023\n\n\n\n\n12\n23. Jan. 2023\n\n\n\n\n13\n30. Jan. 2023\n\n\n\n\n14\n06. Feb. 2023"
   },
   {
     "objectID": "course-links.html",
@@ -551,6 +551,41 @@
     "title": "Computing troubleshooting",
     "section": "",
     "text": "If the status shows something other than Operational, this means there is a known incident with the containers. Check back later to see if it’s been resolved. If there’s a deadline coming up soon, post on the course forum to let us know that there’s an issue. We can look into how quickly it might get resolved and decide on what to do about the deadline accordingly. Note: We don’t anticipate this to happen regularly, the systems are Operational a huge majority of the time!\nIf the status shows Operational, this means the system is expected to be working. Check your internet connection, if need be, restart your computer to ensure a fresh new connection. If your issue persists, post on the course forum with details on what you’ve tried and the errors you see (including verbatim errors and/or screenshots).\nEither way you can also fill out the form here, which will notify our the R TA for the department as well as our undergraduate coordinator. They’ll be able to help diagnose the issue."
+  },
+  {
+    "objectID": "slides/lab-1.html#ziele",
+    "href": "slides/lab-1.html#ziele",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Ziele",
+    "text": "Ziele\nAm Ende des heutigen Termins solltet ihr folgede Fragen beantworten können:\n\nWie unterschiedet sich eine einfache (lineare) Regression von einem Multi-Level Modell?\nMit welchen Werten (Modellparameter) kann man die Aussagen eines Modells untersuchen?\n\nWelche Modellparameter gibt es?\nWas sagen sie aus?\nWie interpretiert man die Modellparameter Intercept und Steigung.\n\nWas versteht man unter “Fixed-Effects” und was sind “Fixed-Effects Modelle”?"
+  },
+  {
+    "objectID": "slides/lab-1.html#rückblick-zur-letzten-stunde",
+    "href": "slides/lab-1.html#rückblick-zur-letzten-stunde",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Rückblick zur letzten Stunde",
+    "text": "Rückblick zur letzten Stunde\nKonzequenzen hierarchisch organisierter Daten:\n\nBeobachtungen innerhalb einer Gruppe (auch “Einheit”, oder “unit” genannt) ähneln sich stärker als die zwischen den Einheiten.\nDies verletzt die Unabhängigkeitsannahme der einfachen Regression\n\nViele Beobachtungen beeinflüssen sich gegenseitig oder werden in gleichermaßen beeinflüsst.\nDie Beobachtungen sind also nicht von einander unabhängig."
+  },
+  {
+    "objectID": "slides/lab-1.html#die-grundidee-eines-regressionsmodells",
+    "href": "slides/lab-1.html#die-grundidee-eines-regressionsmodells",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Die Grundidee eines Regressionsmodells",
+    "text": "Die Grundidee eines Regressionsmodells\n\nDie Ausprägung einer Variable hängt von der Ausprägung einer anderen Variable (oder Kombination von Variablen) ab.\nDas Modell \\(Y=f(x)+Error\\):\n\nErklärt \\(Y\\) anhand von \\(x\\).\n\nWenn man \\(x\\) transformiert (i.e., \\(f(x)\\)) bekommt man einer Schätzung von \\(Y\\)."
+  },
+  {
+    "objectID": "slides/lab-1.html#beispiel-1",
+    "href": "slides/lab-1.html#beispiel-1",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Beispiel 1",
+    "text": "Beispiel 1"
+  },
+  {
+    "objectID": "slides/lab-1.html#beispiel-1-linear-model",
+    "href": "slides/lab-1.html#beispiel-1-linear-model",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Beispiel 1 (linear model)",
+    "text": "Beispiel 1 (linear model)\n\n\n\nFortgeschrittene statistische Methoden II"
   },
   {
     "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
