@@ -424,28 +424,35 @@
     "href": "slides/lab-1.html#beispiel-1-linear-model",
     "title": "MLM Seminar - Sitzung 3",
     "section": "Beispiel 1 (linear model)",
-    "text": "Beispiel 1 (linear model)"
+    "text": "Beispiel 1 (linear model)\n\nrequire(MASS)\nrequire(ggplot2)\n\nggplot(data = nlschools, aes(x = SES, y = IQ)) +\n    geom_point(ize = 0.8) +\n    geom_smooth(method = 'lm') +\n    theme_linedraw() +\n    coord_cartesian(ylim = c(0, 20)) +\n    labs(y = 'Test Score') +\n    theme(axis.text = element_text(size = 12))"
   },
   {
-    "objectID": "slides/lab-1.html#fragestellung",
-    "href": "slides/lab-1.html#fragestellung",
+    "objectID": "slides/lab-1.html#die-fragestellung-einer-linearen-regression",
+    "href": "slides/lab-1.html#die-fragestellung-einer-linearen-regression",
     "title": "MLM Seminar - Sitzung 3",
-    "section": "Fragestellung",
-    "text": "Fragestellung\nWir wollen untersuchen wie sich der soziökonomischer Status (SES) von Schüler:innen, sich auf ihre Perfomanz in einem TEst zur Lesekompetenz (performance) auswirkt.\n\n\n\nCall:\nlm(formula = IQ ~ SES, data = daten_klassen)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.7587 -1.2683  0.2413  1.2849  4.7413 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)  9.10790    1.43915   6.329 5.58e-07 ***\nSES          0.06508    0.09647   0.675    0.505    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.517 on 30 degrees of freedom\nMultiple R-squared:  0.01495,   Adjusted R-squared:  -0.01789 \nF-statistic: 0.4552 on 1 and 30 DF,  p-value: 0.5051\n\n\n\n\n\nAnalysis of Variance Table\n\nResponse: IQ\n             Df  Sum Sq Mean Sq F value Pr(>F)\nSES_minus_10  1   2.884  2.8839  0.4552 0.5051\nResiduals    30 190.085  6.3362               \n\n\n\nCall:\nlm(formula = IQ ~ SES_minus_10, data = daten_klassen)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.7587 -1.2683  0.2413  1.2849  4.7413 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   9.75872    0.60099  16.238   <2e-16 ***\nSES_minus_10  0.06508    0.09647   0.675    0.505    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.517 on 30 degrees of freedom\nMultiple R-squared:  0.01495,   Adjusted R-squared:  -0.01789 \nF-statistic: 0.4552 on 1 and 30 DF,  p-value: 0.5051"
-  },
-  {
-    "objectID": "slides/lab-1.html#ergebnisse-einfache-regression-perfomance-ses",
-    "href": "slides/lab-1.html#ergebnisse-einfache-regression-perfomance-ses",
-    "title": "MLM Seminar - Sitzung 3",
-    "section": "Ergebnisse einfache Regression (perfomance ~ ses)",
-    "text": "Ergebnisse einfache Regression (perfomance ~ ses)\nEine einfache lineare Reghression (ordinary least squares regression - OLS) ist ein Modell, der den Effekt von SES auf die Lesekompetenz untersucht, ohne die hierarchische Struktur der Daten zu berücksichtigen.\nd.h. es untersucht der Zusammenhang zwischen SES und performance über alle Gruppen hinweg.\nOder: Das Modell geht, davon aus, dass alle Personen aus einer einzigen Gruppe gezogen wurden (z.B. die allgemeine Population).\nFür die Grafik wurden die Werte von SES und perfomance zentriert. Das bedeutet, dass ihr Mittelwert = Null ist.\nAuf der Y-Achse sehen wir perfromace, das ist die Variable, die vorhergesagt werden soll (auch Kriterium, oder Antwortvariable genannt).\nAuf der X-Achse befindet sich unser Prädiktor-Varible (das womit wir performance vorhersagen wollen)."
+    "section": "Die Fragestellung einer linearen Regression",
+    "text": "Die Fragestellung einer linearen Regression\n\n\nEs soll untersucht werden, wie sich eine Variable \\(X\\) auf eine Variable \\(Y\\) auswirkt.\nIn unseren Beispiel:\n\nSoziökonomischer Status (SES) von Schüler:innen (\\(X\\)) wirkt sich auf die Perfomanz (Test Score) der Schüler:innen in einem Test (\\(Y\\)).\nAuf der \\(Y\\)-Achse sehen wir die Performanz.\n\nDas ist die Variable, die vorhergesagt werden soll (auch Kriterium, oder Antwortvariable genannt).\n\nAuf der \\(X\\)-Achse sehen wir die Prädiktor-Varible (das womit wir Performanz vorhersagen wollen)."
   },
   {
     "objectID": "slides/lab-1.html#modelparameter",
     "href": "slides/lab-1.html#modelparameter",
     "title": "MLM Seminar - Sitzung 3",
     "section": "Modelparameter",
-    "text": "Modelparameter\n\n\\(\\beta_{0}\\)\n\nDer Intercept des Modells (AKA - der y-Achsen-Abschnitt). \\(\\beta{0}\\)kann auch als: “Der Wert von Y, wenn X = 0 ist”. Also welche performane zeigt eine Schüler:in, wenn sie ein Wert von 0 auf ses hat. Da ein Wert von 0 in ses den Mittelwert der Gruppe eintspricht, entspricht : “Die erwartete performance (Lesekompetenz), wenn ses (sozioökonomischer Status) durchschnittlich ist”.\n\n\\(\\beta_{1}\\)\n\nDer Steigung des Modells (AKA - der effekt vom Prädiktor). \\(\\beta_{1}\\) kann folgendermaßen vertanden werden: Wenn ses um eine Einheit steigt (also von 0 zu 1), steigt performance um das \\(\\beta_{1}\\)-fache. Also um 0.19. Jemand der ein ses von 1 hat, hat eine um 0.19 höre performance. Jemand der ein ses von 2 hat, hat eine 2 * 0.19 (= 0.38) höhere performance, usw.\n\n\nFortgeschrittene statistische Methoden II"
+    "text": "Modelparameter\n\n\n\\(\\beta_{0}\\)  Der Intercept des Modells (AKA - der y-Achsen-Abschnitt). \\(\\beta_{0}\\) kann auch als: “Der Wert von \\(Y\\), wenn \\(X\\) = 0 ist”. - Oder, die Antwort auf die Frage: Welche Perfomanz zeigt eine Schüler:in, wenn sie ein Wert von 0 auf SES hat.\n\\(\\beta_{1}\\)  Der effekt vom Prädiktor \\(X\\) (AKA - Die Steigung der Regressionsgerade) \\(\\beta_{1}\\) kann folgendermaßen vertanden werden: - Wenn SES um eine Einheit steigt (also von 0 zu 1), steigt die Performanz (im Mittel) um das \\(\\beta_{1}\\)-fache.\n\nrequire(MASS)\nrequire(ggplot2)\n\nmodel <- lm(data = nlschools, IQ ~ SES)\nsummary(model)\n\n\nCall:\nlm(formula = IQ ~ SES, data = nlschools)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.2659 -1.1651  0.0345  1.2147  6.4551 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 10.163000   0.112430   90.39   <2e-16 ***\nSES          0.060084   0.003764   15.96   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.963 on 2285 degrees of freedom\nMultiple R-squared:  0.1004,    Adjusted R-squared:  0.09996 \nF-statistic: 254.9 on 1 and 2285 DF,  p-value: < 2.2e-16"
+  },
+  {
+    "objectID": "slides/lab-1.html#modelvorhersahen",
+    "href": "slides/lab-1.html#modelvorhersahen",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Modelvorhersahen",
+    "text": "Modelvorhersahen\n\nrequire(MASS)\nrequire(ggplot2)\n\nb0 = 10.163000\nb1 = 0.060084\nx = c(15, 25)\n\nvorhersagen <- b0 + b1 * x\nvorhersagen_df <- data.frame(SES = x, IQ = vorhersagen)\n\nggplot(data = nlschools, aes(x = SES, y = IQ)) +\n    geom_point(size = 0.8, alpha = 0.5, color = 'gray') +\n    geom_smooth(method = 'lm', alpha = 0.75) +\n    geom_point(data = vorhersagen_df, size = 2.0, color = 'red', shape = 8) +\n    theme_linedraw() +\n    coord_cartesian(ylim = c(0, 20)) +\n    labs(y = 'Test Score') +\n    theme(axis.text = element_text(size = 12))"
+  },
+  {
+    "objectID": "slides/lab-1.html#zwischenfazit",
+    "href": "slides/lab-1.html#zwischenfazit",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Zwischenfazit",
+    "text": "Zwischenfazit\nInterpretation der Ergebnisse: - je höher SES, desto höher die Performanz der Schüler:innen. - Zusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben: - Wenn SES um eine Einheit steigt, steigt die Performanz um 0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt). - Das Modell nimmt an, das der Effekt von SES auf die performance konstant (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet). - Fix-effects sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind).\n\n\nFortgeschrittene statistische Methoden II"
   },
   {
     "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
