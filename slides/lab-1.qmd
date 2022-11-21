@@ -5,11 +5,13 @@ footer:  "[Fortgeschrittene statistische Methoden II](https://josealanis.github.
 # logo: "images/mlm-formula.png"
 editor: visual
 format: 
-  revealjs: 
+  revealjs:
     theme: slides.scss
     transition: fade
     slide-number: true
     slide-level: 3
+    smaller: true
+    scrollable: true
 execute:
   freeze: auto
 ---
@@ -34,6 +36,10 @@ Konzequenzen hierarchisch organisierter Daten:
     -   Viele Beobachtungen beeinflüssen sich gegenseitig oder werden in gleichermaßen beeinflüsst.
     -   Die **Beobachtungen** sind also **nicht von einander unabhängig**.
 
+<center>
+![](../images/multilevel-data.png){fig-alt="Multilevel data." width="50%"}
+</center>
+
 ## Die Grundidee eines Regressionsmodells
 
 -   Die Ausprägung einer Variable hängt von der Ausprägung einer anderen Variable (oder Kombination von Variablen) ab.
@@ -45,104 +51,144 @@ Konzequenzen hierarchisch organisierter Daten:
 
 ## Beispiel 1
 
-```{r, error=TRUE, results = "hold"}
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = FALSE}
 require(MASS)
 require(ggplot2)
 
 ggplot(data = nlschools, aes(x = SES, y = IQ)) +
-    geom_point() +
+    geom_point(size = 0.8) +
     theme_linedraw() +
     coord_cartesian(ylim = c(0, 20)) +
+    labs(y = 'Test Score') +
     theme(axis.text = element_text(size = 12))
 ```
 
 ## Beispiel 1 (linear model)
 
-```{r, error=TRUE, results = "hold"}
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = TRUE}
 require(MASS)
 require(ggplot2)
 
 ggplot(data = nlschools, aes(x = SES, y = IQ)) +
-    geom_point() +
+    geom_point(ize = 0.8) +
     geom_smooth(method = 'lm') +
     theme_linedraw() +
     coord_cartesian(ylim = c(0, 20)) +
+    labs(y = 'Test Score') +
     theme(axis.text = element_text(size = 12))
 ```
 
-## Fragestellung
+## Die Fragestellung einer linearen Regression {.scrollable}
 
-Wir wollen untersuchen wie sich der soziökonomischer Status (SES) von Schüler:innen, sich auf ihre Perfomanz in einem TEst zur Lesekompetenz (performance) auswirkt.
+:::: {.columns}
 
-```{r, incldude = FALSE}
+::: {.column width="65%"}
+Es soll untersucht werden, wie sich eine Variable $X$ auf eine Variable $Y$ auswirkt.
+
+In unseren Beispiel:
+
+- Soziökonomischer Status (**SES**) von Schüler:innen ($X$) wirkt sich auf die Perfomanz (**Test Score**)
+der Schüler:innen in einem Test ($Y$).
+
+- Auf der $Y$-Achse sehen wir die Performanz.
+  - Das ist die Variable, die vorhergesagt werden soll (auch *Kriterium*, oder *Antwortvariable* genannt).
+
+- Auf der $X$-Achse sehen wir die Prädiktor-Varible (das womit wir Performanz vorhersagen wollen).
+:::
+
+::: {.column width="35%"}
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = FALSE}
 require(MASS)
-library(MASS)
-
-
-daten <- nlschools
-
 require(ggplot2)
 
-daten_klassen <- daten[daten$class == "180" | daten$class == "280", ]
+ggplot(data = nlschools, aes(x = SES, y = IQ)) +
+    geom_point(ize = 0.8) +
+    geom_smooth(method = 'lm') +
+    theme_linedraw() +
+    coord_cartesian(ylim = c(0, 20)) +
+    labs(y = 'Test Score') +
+    theme(axis.text = element_text(size = 12))
+```
+:::
 
-model_1 <- lm(data = daten_klassen, formula = IQ ~ SES)
-summary(model_1)
+::::
 
-x <- 1:10
-b0 <- model_1$coefficients[1]
-b1 <- model_1$coefficients[2]
+## Modelparameter {.scrollable}
 
-vorhersagen <- data.frame(SES = x, IQ = b0 + (b1 * x))
+:::: {.columns}
 
-ggplot(data = daten_klassen, 
-       aes(x = SES, y = IQ)) +
-  geom_point() +
-  geom_smooth(method = "lm", full_range = T) +
-  coord_cartesian(xlim = c(-5, 40)) +
-  geom_point(data = data.frame(SES = 0, 
-                               IQ = model_1$coefficients[1]), 
-             color = 'red', shape = 8, size = 2) +
-  geom_line(data = vorhersagen,
-            linetype = 'dotted')
+::: {.column width="60%"}
 
-daten_klassen$SES_minus_10 <- daten_klassen$SES - 10
+**$\beta_{0}$**
+<br>
+Der Intercept des Modells (AKA - der y-Achsen-Abschnitt).
+$\beta_{0}$ kann auch als: “Der Wert von $Y$, wenn $X$ = 0 ist”.
+- Oder, die Antwort auf die Frage: Welche Perfomanz zeigt eine Schüler:in,
+wenn sie ein Wert von 0 auf SES hat.
 
-model_2 <- lm(data = daten_klassen, formula = IQ ~ SES_minus_10)
-anova(model_2)
-summary(model_2)
+**$\beta_{1}$**
+<br>
+Der effekt vom Prädiktor $X$ (AKA - Die Steigung der Regressionsgerade)
+$\beta_{1}$ kann folgendermaßen vertanden werden:
+- Wenn SES um eine Einheit steigt (also von 0 zu 1), steigt die Performanz (im Mittel)
+um das $\beta_{1}$-fache.
 
-ggplot(data = daten_klassen, 
-       aes(x = SES_minus_10, y = IQ)) +
-  geom_point() +
-  geom_smooth(method = "lm", full_range = T) +
-  coord_cartesian(xlim = c(-5, 40)) +
-  geom_point(data = data.frame(SES_minus_10 = 0, 
-                               IQ = model_2$coefficients[1]), 
-             color = 'red', shape = 8, size = 2)
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = TRUE}
+require(MASS)
+require(ggplot2)
 
+model <- lm(data = nlschools, IQ ~ SES)
+summary(model)
+```
+:::
+
+::: {.column width="40%"}
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = FALSE}
+require(MASS)
+require(ggplot2)
+
+ggplot(data = nlschools, aes(x = SES, y = IQ)) +
+    geom_point(ize = 0.8) +
+    geom_smooth(method = 'lm') +
+    theme_linedraw() +
+    coord_cartesian(ylim = c(0, 20)) +
+    labs(y = 'Test Score') +
+    theme(axis.text = element_text(size = 12))
+```
+:::
+
+::::
+
+## Modelvorhersahen
+
+```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = TRUE}
+require(MASS)
+require(ggplot2)
+
+b0 = 10.163000
+b1 = 0.060084
+x = c(15, 25)
+
+vorhersagen <- b0 + b1 * x
+vorhersagen_df <- data.frame(SES = x, IQ = vorhersagen)
+
+ggplot(data = nlschools, aes(x = SES, y = IQ)) +
+    geom_point(size = 0.8, alpha = 0.5, color = 'gray') +
+    geom_smooth(method = 'lm', alpha = 0.75) +
+    geom_point(data = vorhersagen_df, size = 2.0, color = 'red', shape = 8) +
+    theme_linedraw() +
+    coord_cartesian(ylim = c(0, 20)) +
+    labs(y = 'Test Score') +
+    theme(axis.text = element_text(size = 12))
 ```
 
-## Ergebnisse einfache Regression (perfomance ~ ses)
+## Zwischenfazit
 
-Eine einfache lineare Reghression (ordinary least squares regression - OLS) ist ein Modell, der den Effekt von SES auf die Lesekompetenz untersucht, ohne die hierarchische Struktur der Daten zu berücksichtigen.
+Interpretation der Ergebnisse:
+- je höher SES, desto höher die Performanz der Schüler:innen.
+- Zusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben:
+  - Wenn SES um eine Einheit steigt, steigt die Performanz um  0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt).
+- Das Modell nimmt an, das der Effekt von SES auf die performance **konstant** (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet).
+- **Fix-effects** sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind).
 
-d.h. es untersucht der Zusammenhang zwischen SES und performance über alle Gruppen hinweg.
 
-Oder: Das Modell geht, davon aus, dass alle Personen aus einer einzigen Gruppe gezogen wurden (z.B. die allgemeine Population).
-
-Für die Grafik wurden die Werte von SES und perfomance zentriert. Das bedeutet, dass ihr Mittelwert = Null ist.
-
-Auf der Y-Achse sehen wir perfromace, das ist die Variable, die vorhergesagt werden soll (auch Kriterium, oder Antwortvariable genannt).
-
-Auf der X-Achse befindet sich unser Prädiktor-Varible (das womit wir performance vorhersagen wollen).
-
-## Modelparameter
-
-- $\beta_{0}$
-
-Der Intercept des Modells (AKA - der y-Achsen-Abschnitt). $\beta{0}$kann auch als: “Der Wert von Y, wenn X = 0 ist”. Also welche performane zeigt eine Schüler:in, wenn sie ein Wert von 0 auf ses hat. Da ein Wert von 0 in ses den Mittelwert der Gruppe eintspricht, entspricht : “Die erwartete performance (Lesekompetenz), wenn ses (sozioökonomischer Status) durchschnittlich ist”.
-
-- $\beta_{1}$
-
-Der Steigung des Modells (AKA - der effekt vom Prädiktor).
-$\beta_{1}$ kann folgendermaßen vertanden werden: Wenn ses um eine Einheit steigt (also von 0 zu 1), steigt performance um das $\beta_{1}$-fache. Also um 0.19. Jemand der ein ses von 1 hat, hat eine um 0.19 höre performance. Jemand der ein ses von 2 hat, hat eine 2 * 0.19 (= 0.38) höhere performance, usw.

@@ -63,9 +63,10 @@ website:
             text: Useful links
           - href: course-faq.qmd
             text: FAQ
-      - slides:
-         - href: slides/lab-1.qmd
-           text: "Session 2"
+      - section: "Slides"
+        contents:
+          - href: slides/lab-1.qmd
+            text: "Modelspezifikation"
       - section: "R-Kurs-Buch"
         contents:
           - href: r-book/index.qmd
