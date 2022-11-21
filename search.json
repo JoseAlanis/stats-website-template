@@ -396,7 +396,7 @@
     "href": "slides/lab-1.html#ziele",
     "title": "MLM Seminar - Sitzung 3",
     "section": "Ziele",
-    "text": "Ziele\nAm Ende des heutigen Termins solltet ihr folgede Fragen beantworten können:\n\nWie unterschiedet sich eine einfache (lineare) Regression von einem Multi-Level Modell?\nMit welchen Werten (Modellparameter) kann man die Aussagen eines Modells untersuchen?\n\nWelche Modellparameter gibt es?\nWas sagen sie aus?\nWie interpretiert man die Modellparameter Intercept und Steigung.\n\nWas versteht man unter “Fixed-Effects” und was sind “Fixed-Effects Modelle”?"
+    "text": "Ziele\nAm Ende des heutigen Termins sollten wir folgede Fragen beantworten können:\n\nWie unterschiedet sich eine einfache (lineare) Regression von einem Multi-Level Modell?\nMit welchen Werten (Modellparameter) kann man die Aussagen eines Modells untersuchen?\n\nWelche Modellparameter gibt es?\nWas sagen sie aus?\nWie interpretiert man die Modellparameter Intercept und Steigung.\n\nWas versteht man unter “Fixed-Effects” und was sind “Fixed-Effects Modelle”?"
   },
   {
     "objectID": "slides/lab-1.html#rückblick-zur-letzten-stunde",
@@ -424,7 +424,28 @@
     "href": "slides/lab-1.html#beispiel-1-linear-model",
     "title": "MLM Seminar - Sitzung 3",
     "section": "Beispiel 1 (linear model)",
-    "text": "Beispiel 1 (linear model)\n\n\n\nFortgeschrittene statistische Methoden II"
+    "text": "Beispiel 1 (linear model)"
+  },
+  {
+    "objectID": "slides/lab-1.html#fragestellung",
+    "href": "slides/lab-1.html#fragestellung",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Fragestellung",
+    "text": "Fragestellung\nWir wollen untersuchen wie sich der soziökonomischer Status (SES) von Schüler:innen, sich auf ihre Perfomanz in einem TEst zur Lesekompetenz (performance) auswirkt.\n\n\n\nCall:\nlm(formula = IQ ~ SES, data = daten_klassen)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.7587 -1.2683  0.2413  1.2849  4.7413 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)  9.10790    1.43915   6.329 5.58e-07 ***\nSES          0.06508    0.09647   0.675    0.505    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.517 on 30 degrees of freedom\nMultiple R-squared:  0.01495,   Adjusted R-squared:  -0.01789 \nF-statistic: 0.4552 on 1 and 30 DF,  p-value: 0.5051\n\n\n\n\n\nAnalysis of Variance Table\n\nResponse: IQ\n             Df  Sum Sq Mean Sq F value Pr(>F)\nSES_minus_10  1   2.884  2.8839  0.4552 0.5051\nResiduals    30 190.085  6.3362               \n\n\n\nCall:\nlm(formula = IQ ~ SES_minus_10, data = daten_klassen)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.7587 -1.2683  0.2413  1.2849  4.7413 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   9.75872    0.60099  16.238   <2e-16 ***\nSES_minus_10  0.06508    0.09647   0.675    0.505    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.517 on 30 degrees of freedom\nMultiple R-squared:  0.01495,   Adjusted R-squared:  -0.01789 \nF-statistic: 0.4552 on 1 and 30 DF,  p-value: 0.5051"
+  },
+  {
+    "objectID": "slides/lab-1.html#ergebnisse-einfache-regression-perfomance-ses",
+    "href": "slides/lab-1.html#ergebnisse-einfache-regression-perfomance-ses",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Ergebnisse einfache Regression (perfomance ~ ses)",
+    "text": "Ergebnisse einfache Regression (perfomance ~ ses)\nEine einfache lineare Reghression (ordinary least squares regression - OLS) ist ein Modell, der den Effekt von SES auf die Lesekompetenz untersucht, ohne die hierarchische Struktur der Daten zu berücksichtigen.\nd.h. es untersucht der Zusammenhang zwischen SES und performance über alle Gruppen hinweg.\nOder: Das Modell geht, davon aus, dass alle Personen aus einer einzigen Gruppe gezogen wurden (z.B. die allgemeine Population).\nFür die Grafik wurden die Werte von SES und perfomance zentriert. Das bedeutet, dass ihr Mittelwert = Null ist.\nAuf der Y-Achse sehen wir perfromace, das ist die Variable, die vorhergesagt werden soll (auch Kriterium, oder Antwortvariable genannt).\nAuf der X-Achse befindet sich unser Prädiktor-Varible (das womit wir performance vorhersagen wollen)."
+  },
+  {
+    "objectID": "slides/lab-1.html#modelparameter",
+    "href": "slides/lab-1.html#modelparameter",
+    "title": "MLM Seminar - Sitzung 3",
+    "section": "Modelparameter",
+    "text": "Modelparameter\n\n\\(\\beta_{0}\\)\n\nDer Intercept des Modells (AKA - der y-Achsen-Abschnitt). \\(\\beta{0}\\)kann auch als: “Der Wert von Y, wenn X = 0 ist”. Also welche performane zeigt eine Schüler:in, wenn sie ein Wert von 0 auf ses hat. Da ein Wert von 0 in ses den Mittelwert der Gruppe eintspricht, entspricht : “Die erwartete performance (Lesekompetenz), wenn ses (sozioökonomischer Status) durchschnittlich ist”.\n\n\\(\\beta_{1}\\)\n\nDer Steigung des Modells (AKA - der effekt vom Prädiktor). \\(\\beta_{1}\\) kann folgendermaßen vertanden werden: Wenn ses um eine Einheit steigt (also von 0 zu 1), steigt performance um das \\(\\beta_{1}\\)-fache. Also um 0.19. Jemand der ein ses von 1 hat, hat eine um 0.19 höre performance. Jemand der ein ses von 2 hat, hat eine 2 * 0.19 (= 0.38) höhere performance, usw.\n\n\nFortgeschrittene statistische Methoden II"
   },
   {
     "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
