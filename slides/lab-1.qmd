@@ -16,31 +16,32 @@ execute:
 
 ## Ziele
 
-Am Ende des heutigen Termins solltet ihr folgede Fragen beantworten können:
+Am Ende des heutigen Termins sollten wir folgede Fragen beantworten können:
 
-- Wie unterschiedet sich eine einfache (lineare) Regression von einem Multi-Level Modell?
-- Mit welchen Werten (Modellparameter) kann man die Aussagen eines Modells untersuchen?
-  - Welche Modellparameter gibt es?
-  - Was sagen sie aus?
-  - Wie interpretiert man die Modellparameter **Intercept** und **Steigung**.
-- Was versteht man unter *“Fixed-Effects”* und was sind *“Fixed-Effects Modelle”*?
+-   Wie unterschiedet sich eine einfache (lineare) Regression von einem Multi-Level Modell?
+-   Mit welchen Werten (Modellparameter) kann man die Aussagen eines Modells untersuchen?
+    -   Welche Modellparameter gibt es?
+    -   Was sagen sie aus?
+    -   Wie interpretiert man die Modellparameter **Intercept** und **Steigung**.
+-   Was versteht man unter *"Fixed-Effects"* und was sind *"Fixed-Effects Modelle"*?
 
 ## Rückblick zur letzten Stunde
 
 Konzequenzen hierarchisch organisierter Daten:
 
-- Beobachtungen innerhalb einer Gruppe (auch “Einheit”, oder *“unit”* genannt) ähneln sich stärker als die zwischen den Einheiten.
-- Dies verletzt die Unabhängigkeitsannahme der einfachen Regression
-  - Viele Beobachtungen beeinflüssen sich gegenseitig oder werden in gleichermaßen beeinflüsst.
-  - Die **Beobachtungen** sind also **nicht von einander unabhängig**.
+-   Beobachtungen innerhalb einer Gruppe (auch "Einheit", oder *"unit"* genannt) ähneln sich stärker als die zwischen den Einheiten.
+-   Dies verletzt die Unabhängigkeitsannahme der einfachen Regression
+    -   Viele Beobachtungen beeinflüssen sich gegenseitig oder werden in gleichermaßen beeinflüsst.
+    -   Die **Beobachtungen** sind also **nicht von einander unabhängig**.
 
 ## Die Grundidee eines Regressionsmodells
 
-- Die Ausprägung einer Variable hängt von der Ausprägung einer anderen Variable (oder Kombination von Variablen) ab.
+-   Die Ausprägung einer Variable hängt von der Ausprägung einer anderen Variable (oder Kombination von Variablen) ab.
 
-- Das Modell $Y=f(x)+Error$:
-  - Erklärt $Y$ anhand von $x$.
-    - Wenn man $x$ transformiert (i.e., $f(x)$) bekommt man einer Schätzung von $Y$.
+-   Das Modell $Y=f(x)+Error$:
+
+    -   Erklärt $Y$ anhand von $x$.
+        -   Wenn man $x$ transformiert (i.e., $f(x)$) bekommt man einer Schätzung von $Y$.
 
 ## Beispiel 1
 
@@ -68,3 +69,80 @@ ggplot(data = nlschools, aes(x = SES, y = IQ)) +
     coord_cartesian(ylim = c(0, 20)) +
     theme(axis.text = element_text(size = 12))
 ```
+
+## Fragestellung
+
+Wir wollen untersuchen wie sich der soziökonomischer Status (SES) von Schüler:innen, sich auf ihre Perfomanz in einem TEst zur Lesekompetenz (performance) auswirkt.
+
+```{r, incldude = FALSE}
+require(MASS)
+library(MASS)
+
+
+daten <- nlschools
+
+require(ggplot2)
+
+daten_klassen <- daten[daten$class == "180" | daten$class == "280", ]
+
+model_1 <- lm(data = daten_klassen, formula = IQ ~ SES)
+summary(model_1)
+
+x <- 1:10
+b0 <- model_1$coefficients[1]
+b1 <- model_1$coefficients[2]
+
+vorhersagen <- data.frame(SES = x, IQ = b0 + (b1 * x))
+
+ggplot(data = daten_klassen, 
+       aes(x = SES, y = IQ)) +
+  geom_point() +
+  geom_smooth(method = "lm", full_range = T) +
+  coord_cartesian(xlim = c(-5, 40)) +
+  geom_point(data = data.frame(SES = 0, 
+                               IQ = model_1$coefficients[1]), 
+             color = 'red', shape = 8, size = 2) +
+  geom_line(data = vorhersagen,
+            linetype = 'dotted')
+
+daten_klassen$SES_minus_10 <- daten_klassen$SES - 10
+
+model_2 <- lm(data = daten_klassen, formula = IQ ~ SES_minus_10)
+anova(model_2)
+summary(model_2)
+
+ggplot(data = daten_klassen, 
+       aes(x = SES_minus_10, y = IQ)) +
+  geom_point() +
+  geom_smooth(method = "lm", full_range = T) +
+  coord_cartesian(xlim = c(-5, 40)) +
+  geom_point(data = data.frame(SES_minus_10 = 0, 
+                               IQ = model_2$coefficients[1]), 
+             color = 'red', shape = 8, size = 2)
+
+```
+
+## Ergebnisse einfache Regression (perfomance ~ ses)
+
+Eine einfache lineare Reghression (ordinary least squares regression - OLS) ist ein Modell, der den Effekt von SES auf die Lesekompetenz untersucht, ohne die hierarchische Struktur der Daten zu berücksichtigen.
+
+d.h. es untersucht der Zusammenhang zwischen SES und performance über alle Gruppen hinweg.
+
+Oder: Das Modell geht, davon aus, dass alle Personen aus einer einzigen Gruppe gezogen wurden (z.B. die allgemeine Population).
+
+Für die Grafik wurden die Werte von SES und perfomance zentriert. Das bedeutet, dass ihr Mittelwert = Null ist.
+
+Auf der Y-Achse sehen wir perfromace, das ist die Variable, die vorhergesagt werden soll (auch Kriterium, oder Antwortvariable genannt).
+
+Auf der X-Achse befindet sich unser Prädiktor-Varible (das womit wir performance vorhersagen wollen).
+
+## Modelparameter
+
+- $\beta_{0}$
+
+Der Intercept des Modells (AKA - der y-Achsen-Abschnitt). $\beta{0}$kann auch als: “Der Wert von Y, wenn X = 0 ist”. Also welche performane zeigt eine Schüler:in, wenn sie ein Wert von 0 auf ses hat. Da ein Wert von 0 in ses den Mittelwert der Gruppe eintspricht, entspricht : “Die erwartete performance (Lesekompetenz), wenn ses (sozioökonomischer Status) durchschnittlich ist”.
+
+- $\beta_{1}$
+
+Der Steigung des Modells (AKA - der effekt vom Prädiktor).
+$\beta_{1}$ kann folgendermaßen vertanden werden: Wenn ses um eine Einheit steigt (also von 0 zu 1), steigt performance um das $\beta_{1}$-fache. Also um 0.19. Jemand der ein ses von 1 hat, hat eine um 0.19 höre performance. Jemand der ein ses von 2 hat, hat eine 2 * 0.19 (= 0.38) höhere performance, usw.
