@@ -66,7 +66,9 @@ website:
       - section: "Slides"
         contents:
           - href: slides/lab-1.qmd
-            text: "Modelspezifikation"
+            text: "Modelspezifikation 1"
+          - href: slides/lab-2.qmd
+            text: "Modelspezifikation 2"
       - section: "R-Kurs-Buch"
         contents:
           - href: r-book/index.qmd
