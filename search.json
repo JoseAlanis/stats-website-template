@@ -308,6 +308,83 @@
     "text": "Zwischenfazit\nInterpretation der Ergebnisse:\n\nje höher SES, desto höher die Performanz der Schüler:innen.\nZusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben:\n\nWenn SES um eine Einheit steigt, steigt die Performanz um 0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt).\n\nDas Modell nimmt an, das der Effekt von SES auf die performance konstant (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet).\nFix-effects sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind).\n\n\n\nFortgeschrittene statistische Methoden II"
   },
   {
+    "objectID": "slides/lab-2.html#modelvorhersahen",
+    "href": "slides/lab-2.html#modelvorhersahen",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Modelvorhersahen",
+    "text": "Modelvorhersahen\n\nrequire(MASS)\nrequire(ggplot2)\n\nb0 = 10.163000\nb1 = 0.060084\nx = c(15, 25)\n\nvorhersagen <- b0 + b1 * x\nvorhersagen_df <- data.frame(SES = x, IQ = vorhersagen)\n\nggplot(data = nlschools, aes(x = SES, y = IQ)) +\n    geom_point(size = 0.8, alpha = 0.5, color = 'gray') +\n    geom_smooth(method = 'lm', alpha = 0.75) +\n    geom_point(data = vorhersagen_df, size = 6.0, color = 'red', shape = 8) +\n    theme_linedraw() +\n    coord_cartesian(ylim = c(0, 20)) +\n    labs(y = 'Test Score') +\n    theme(axis.text = element_text(size = 12))"
+  },
+  {
+    "objectID": "slides/lab-2.html#interpretation-der-ergebnisse",
+    "href": "slides/lab-2.html#interpretation-der-ergebnisse",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Interpretation der Ergebnisse:",
+    "text": "Interpretation der Ergebnisse:\n\nje höher SES, desto höher die Performanz der Schüler:innen.\nZusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben:\n\nWenn SES um eine Einheit steigt, steigt die Performanz um 0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt).\n\nDas Modell nimmt an, das der Effekt von SES auf die performance konstant (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet).\nFix-effects sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind)."
+  },
+  {
+    "objectID": "slides/lab-2.html#berücksichtigung-der-gruppenzugehörigkeit-1",
+    "href": "slides/lab-2.html#berücksichtigung-der-gruppenzugehörigkeit-1",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Berücksichtigung der Gruppenzugehörigkeit (1)",
+    "text": "Berücksichtigung der Gruppenzugehörigkeit (1)\nLasst uns die Analyse wiederholen. Allerdings werden wir dabei berücksichtigen, dass die Daten der Schüler:innen aus drei verschiedenen Klassen stammen.\n\nIn einem ersten Schritt filtern wir die Daten nach Klassen.\nDanach können wir eine einfache Regression für jede Klasse berechnen und die Ergebnisse aus diesen Regressionen vergleichen."
+  },
+  {
+    "objectID": "slides/lab-2.html#betrachten-wir-die-folgende-abbildung",
+    "href": "slides/lab-2.html#betrachten-wir-die-folgende-abbildung",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Betrachten wir die folgende Abbildung:",
+    "text": "Betrachten wir die folgende Abbildung:\n\nrequire(MASS)\nrequire(dplyr)\nrequire(ggplot2)\n\nerste_drei <- nlschools %>%\n    filter(class %in% unique(nlschools$class)[1:3])\n\nggplot(data = erste_drei, aes(x = SES, y = IQ, color = class)) +\n    geom_point(size = 1.0, alpha = 1.0) +\n    geom_smooth(method = 'lm', alpha = 0.50) +\n    theme_linedraw() +\n    coord_cartesian(ylim = c(0, 20)) +\n    labs(y = 'Test Score') +\n    theme(axis.text = element_text(size = 12)) +\n    facet_wrap(~ class, ncol = 3)"
+  },
+  {
+    "objectID": "slides/lab-2.html#berücksichtigung-der-gruppenzugehörigkeit-2",
+    "href": "slides/lab-2.html#berücksichtigung-der-gruppenzugehörigkeit-2",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Berücksichtigung der Gruppenzugehörigkeit (2)",
+    "text": "Berücksichtigung der Gruppenzugehörigkeit (2)\nAus unserer Analyse lässt sich nun ein \\(\\beta_{0}\\) parameter und ein \\(\\beta_{1}\\) parameter für jede gruppen Regression schätzen.\n\nNennen wir diese \\(\\beta_{0, j}\\) und \\(\\beta_{1, j}\\). Der index \\(j\\) bedeutet, dass jede klasse ihr eigenes \\(\\beta_{0}\\) bzw. \\(\\beta_{1}\\) hat.\nWir können diese auch “ausschrieben”:\n\n\\(\\widehat{\\beta_{0, 1}}\\) und \\(\\widehat{\\beta_{1, 1}}\\)für Gruppe 1.\n\\(\\widehat{\\beta_{0, 2}}\\) und \\(\\widehat{\\beta_{1, 2}}\\)für Gruppe 2.\n\\(\\widehat{\\beta_{0, 3}}\\) und \\(\\widehat{\\beta_{1, 3}}\\)für Gruppe 3."
+  },
+  {
+    "objectID": "slides/lab-2.html#nun-in-r-klasse-1",
+    "href": "slides/lab-2.html#nun-in-r-klasse-1",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Nun in R (Klasse 1):",
+    "text": "Nun in R (Klasse 1):\n\nklasse_1 <- nlschools %>%\n    filter(class %in% unique(nlschools$class)[1])\n\nmodel_1 <- lm(data = klasse_1, IQ ~ SES)\nsummary(model_1)\n\n\nCall:\nlm(formula = IQ ~ SES, data = klasse_1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-5.6977 -1.0080  0.3023  1.3023  4.8023 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   8.0773     1.5809   5.109 3.56e-05 ***\nSES           0.1620     0.1084   1.495    0.149    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.494 on 23 degrees of freedom\nMultiple R-squared:  0.08857,   Adjusted R-squared:  0.04894 \nF-statistic: 2.235 on 1 and 23 DF,  p-value: 0.1485"
+  },
+  {
+    "objectID": "slides/lab-2.html#nun-in-r-klasse-2",
+    "href": "slides/lab-2.html#nun-in-r-klasse-2",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Nun in R (Klasse 2):",
+    "text": "Nun in R (Klasse 2):\n\nklasse_2 <- nlschools %>%\n    filter(class %in% unique(nlschools$class)[2])\n\nmodel_2 <- lm(data = klasse_2, IQ ~ SES)\nsummary(model_2)\n\n\nCall:\nlm(formula = IQ ~ SES, data = klasse_2)\n\nResiduals:\n        1         2         3         4         5         6         7 \n 2.406639  1.406639 -0.004149 -1.593361 -2.682573 -0.850622  1.317427 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)  12.3610     2.7335   4.522  0.00627 **\nSES          -0.2178     0.1703  -1.279  0.25693   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.998 on 5 degrees of freedom\nMultiple R-squared:  0.2466,    Adjusted R-squared:  0.09594 \nF-statistic: 1.637 on 1 and 5 DF,  p-value: 0.2569"
+  },
+  {
+    "objectID": "slides/lab-2.html#nun-in-r-klasse-3",
+    "href": "slides/lab-2.html#nun-in-r-klasse-3",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Nun in R (Klasse 3):",
+    "text": "Nun in R (Klasse 3):\n\nklasse_3 <- nlschools %>%\n    filter(class %in% unique(nlschools$class)[3])\n\nmodel_3 <- lm(data = klasse_3, IQ ~ SES)\nsummary(model_3)\n\n\nCall:\nlm(formula = IQ ~ SES, data = klasse_3)\n\nResiduals:\n       1        2        3        4        5 \n 0.49420 -0.04297  1.95703 -1.46862 -0.93963 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)  8.39427    1.89266   4.435   0.0213 *\nSES          0.10744    0.08994   1.194   0.3181  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.54 on 3 degrees of freedom\nMultiple R-squared:  0.3223,    Adjusted R-squared:  0.09641 \nF-statistic: 1.427 on 1 and 3 DF,  p-value: 0.3181"
+  },
+  {
+    "objectID": "slides/lab-2.html#zwischenfazit-1",
+    "href": "slides/lab-2.html#zwischenfazit-1",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Zwischenfazit (1)",
+    "text": "Zwischenfazit (1)\nBei der Betrachtung von und stellen wir fest, dass es deutliche Unterschiede zwischen den Klassen gibt hinsichtlich:\n\nderen \\(\\beta_{0, j}\\). Also deutliche Unterschiede in deren “Ausgangsleistungsniveaus”.\n\nWoraun kann man dies erkennen?\n\n\\(\\beta_{0, j}\\) ist der y-Achsenabschnitte, also die erwartete performance wenn SES = 0 ist.\n\n\nden Zusammenhang zwischen SES und Perfromanz.\n\ndies lässt sich in unterschiedlichen \\(\\beta_{1, j}\\) ablesen (die geschätzte Steigung der Modelle)."
+  },
+  {
+    "objectID": "slides/lab-2.html#zwischenfazit-2",
+    "href": "slides/lab-2.html#zwischenfazit-2",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Zwischenfazit (2)",
+    "text": "Zwischenfazit (2)\nDie Zugehörigkeit zu einer Klasse verändert also den Effekt von SES (zumindest deskriptiv). In einer einfachen linearen Regression könnten wir dies nicht sehen, weil das Modell “naiv” gegenüber die Klassenzugehörigkeit der Personen ist.\nEs is wahrschienlich am sinnvollsten den Effekt von ses und Klassenzugehörigkeit (Ein fixer between-subjects Faktor mit 3 Stufen: Klasse 1, Klasse 2, Klasse 3) in einem gemeinsammen Modell zu untersuchen:\n\nBei nur drei Klassen könnten wir Klassenzugehörigkeit als Kontrollvariable im Modell aufnehmen:\n\nlm(data = erste_drei, IQ ~ class + SES)\n\nDies würde für die Abhängigkeiten, die auf die Klassenzugehörigkeit zurück gehen kontrollieren.\n\nAber: Wenn wir keine Interaktion zwischen Klasse und ses zulassen, würde unser Modell nur für die Unterschiede der Klassen kontrollieren. Es würde also die Mittelwertsunterschiede der Klassen “heraus rechnen”.\n\nAlternativ könnten wir Klassenzugehörigkeit als einen Moderator (Interaktion zwischen class und SES) im Modell aufnehmen:\n\nDies würde uns erlauben die unterschiedliche \\(\\beta_{1, j}\\) zu untersuchen."
+  },
+  {
+    "objectID": "slides/lab-2.html#zwischenfazit-3",
+    "href": "slides/lab-2.html#zwischenfazit-3",
+    "title": "MLM Seminar - Sitzung 4",
+    "section": "Zwischenfazit (3)",
+    "text": "Zwischenfazit (3)\n\nFixed-Effects Modelle sind Modelle in denen Prädiktoren aufgenommen werden um, deren Effekte auf einenm Kriterium zu unterscuchen.\nFixed-Effects sind also die Effekte von den Prädiktoren die uns interessieren.\nDie Prädiktoren können in dem Modell aufgenommen werden, um dafür zu Kontrollieren, oder ihre “kombinierte” Effekte mit anderen Prädiktoen zu untersuchen.\n\n\n\nFortgeschrittene statistische Methoden II"
+  },
+  {
     "objectID": "computing-pipelines.html",
     "href": "computing-pipelines.html",
     "title": "Pipelines",
