@@ -405,134 +405,30 @@
 </div>
 
 </section>
-<section id="modelschätzung" class="title-slide slide level2 center">
-<h2>Modelschätzung</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">require</span>(MASS)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>model_ses <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> nlschools, IQ <span class="sc">~</span> SES)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">summary</span>(model_ses)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = IQ ~ SES, data = nlschools)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--8.2659 -1.1651  0.0345  1.2147  6.4551 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 10.163000   0.112430   90.39   &lt;2e-16 ***
-SES          0.060084   0.003764   15.96   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.963 on 2285 degrees of freedom
-Multiple R-squared:  0.1004,    Adjusted R-squared:  0.09996 
-F-statistic: 254.9 on 1 and 2285 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-</section>
-
 <section id="modelvorhersahen" class="title-slide slide level2 center">
 <h2>Modelvorhersahen</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># beta 0 (Intercept)</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>b0 <span class="ot">=</span> <span class="fl">10.163000</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># beta 1 (Steigung)</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>b1 <span class="ot">=</span> <span class="fl">0.060084</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># X-Werte für die erwartete Y-Werte geschätzt werden sollen</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>x <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># Schätzen wir die Y-Werte mit der Formel der Regression</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>vorhersagen <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Speichern wir die Ergebnisse in einer Tabelle</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>vorhersagen_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SES =</span> x, <span class="at">IQ =</span> <span class="fu">round</span>(vorhersagen, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-
-<section id="visualisierung-1" class="title-slide slide level2 center">
-<h2>Visualisierung (1)</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">require</span>(dplyr)</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>intercept_0 <span class="ot">&lt;-</span> vorhersagen_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">filter</span>(SES <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>intercept_10 <span class="ot">&lt;-</span> vorhersagen_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">filter</span>(SES <span class="sc">==</span> <span class="dv">10</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="fu">require</span>(ggrepel)</span>
-<span id="cb4-11"><a href="#cb4-11"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.5</span>)</span>
-<span id="cb4-12"><a href="#cb4-12"></a>plot_reg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> nlschools, </span>
-<span id="cb4-13"><a href="#cb4-13"></a>                   <span class="fu">aes</span>(<span class="at">x =</span> SES, <span class="at">y =</span> IQ, <span class="at">label =</span> IQ)) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> pd, <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'gray80'</span>),</span>
-<span id="cb4-18"><a href="#cb4-18"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb4-19"><a href="#cb4-19"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>) <span class="sc">+</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>  <span class="co"># geom_line(data = vorhersagen, color = 'red', size = 1.0) +</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> intercept_0,</span>
-<span id="cb4-23"><a href="#cb4-23"></a>             <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> intercept_10,</span>
-<span id="cb4-25"><a href="#cb4-25"></a>             <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> intercept_0, </span>
-<span id="cb4-27"><a href="#cb4-27"></a>                  <span class="at">box.padding =</span> <span class="fl">0.5</span>, </span>
-<span id="cb4-28"><a href="#cb4-28"></a>                  <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
-<span id="cb4-29"><a href="#cb4-29"></a>                  <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">10</span>, <span class="at">nudge_y =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a>    <span class="fu">geom_text_repel</span>(<span class="at">data =</span> intercept_10, </span>
-<span id="cb4-31"><a href="#cb4-31"></a>                  <span class="at">box.padding =</span> <span class="fl">0.5</span>, </span>
-<span id="cb4-32"><a href="#cb4-32"></a>                  <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
-<span id="cb4-33"><a href="#cb4-33"></a>                  <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">nudge_y =</span> <span class="dv">2</span>); plot_reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in geom_text_repel(data = intercept_0, box.padding = 0.5, hjust = "left", : could not find function "geom_text_repel"</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'plot_reg' not found</code></pre>
-</div>
-</div>
-</section>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">require</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>b0 <span class="ot">=</span> <span class="fl">10.163000</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>b1 <span class="ot">=</span> <span class="fl">0.060084</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">25</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>vorhersagen <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x</span>
+<span id="cb1-9"><a href="#cb1-9"></a>vorhersagen_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SES =</span> x, <span class="at">IQ =</span> vorhersagen)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nlschools, <span class="fu">aes</span>(<span class="at">x =</span> SES, <span class="at">y =</span> IQ)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">'gray'</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> vorhersagen_df, <span class="at">size =</span> <span class="fl">6.0</span>, <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">shape =</span> <span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Test Score'</span>) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<section id="visualisierung-2" class="title-slide slide level2 center">
-<h2>Visualisierung (2)</h2>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">require</span>(ggrepel)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.5</span>)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>plot_reg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> nlschools, </span>
-<span id="cb7-5"><a href="#cb7-5"></a>                   <span class="fu">aes</span>(<span class="at">x =</span> SES, <span class="at">y =</span> IQ, <span class="at">label =</span> IQ)) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> pd, <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'gray80'</span>),</span>
-<span id="cb7-10"><a href="#cb7-10"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb7-11"><a href="#cb7-11"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> vorhersagen_df, <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">linewidth =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> intercept_0, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> intercept_10, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> intercept_0, </span>
-<span id="cb7-17"><a href="#cb7-17"></a>                  <span class="at">box.padding =</span> <span class="fl">0.5</span>, </span>
-<span id="cb7-18"><a href="#cb7-18"></a>                  <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
-<span id="cb7-19"><a href="#cb7-19"></a>                  <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">10</span>, <span class="at">nudge_y =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="fu">geom_text_repel</span>(<span class="at">data =</span> intercept_10, </span>
-<span id="cb7-21"><a href="#cb7-21"></a>                  <span class="at">box.padding =</span> <span class="fl">0.5</span>, </span>
-<span id="cb7-22"><a href="#cb7-22"></a>                  <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
-<span id="cb7-23"><a href="#cb7-23"></a>                  <span class="at">nudge_x =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">nudge_y =</span> <span class="dv">2</span>); plot_reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in geom_text_repel(data = intercept_0, box.padding = 0.5, hjust = "left", : could not find function "geom_text_repel"</code></pre>
 </div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'plot_reg' not found</code></pre>
-</div>
-</div>
-</section>
+<img data-src="lab-2_files/figure-revealjs/unnamed-chunk-1-1.png" width="576" class="r-stretch quarto-figure-center"></section>
 
 <section id="interpretation-der-ergebnisse" class="title-slide slide level2 center">
 <h2>Interpretation der Ergebnisse:</h2>
@@ -559,24 +455,24 @@ F-statistic: 254.9 on 1 and 2285 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="betrachten-wir-die-folgende-abbildung" class="title-slide slide level2 center">
 <h2>Betrachten wir die folgende Abbildung:</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">require</span>(MASS)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">require</span>(dplyr)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a>erste_drei <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">ggplot</span>(<span class="at">data =</span> erste_drei, <span class="fu">aes</span>(<span class="at">x =</span> SES, <span class="at">y =</span> IQ, <span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.0</span>, <span class="at">alpha =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="at">alpha =</span> <span class="fl">0.50</span>) <span class="sc">+</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>    <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Test Score'</span>) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a>    <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> class, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">require</span>(MASS)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">require</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>erste_drei <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">ggplot</span>(<span class="at">data =</span> erste_drei, <span class="fu">aes</span>(<span class="at">x =</span> SES, <span class="at">y =</span> IQ, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.0</span>, <span class="at">alpha =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>, <span class="at">alpha =</span> <span class="fl">0.50</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Test Score'</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> class, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="lab-2_files/figure-revealjs/unnamed-chunk-5-1.png" width="576" class="r-stretch quarto-figure-center"></section>
+<img data-src="lab-2_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" class="r-stretch quarto-figure-center"></section>
 
 <section id="berücksichtigung-der-gruppenzugehörigkeit-2" class="title-slide slide level2 center">
 <h2>Berücksichtigung der Gruppenzugehörigkeit (2)</h2>
@@ -595,11 +491,11 @@ F-statistic: 254.9 on 1 and 2285 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="nun-in-r-klasse-1" class="title-slide slide level2 center">
 <h2>Nun in R (Klasse 1):</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>klasse_1 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">1</span>])</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_1, IQ <span class="sc">~</span> SES)</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">summary</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>klasse_1 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">1</span>])</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_1, IQ <span class="sc">~</span> SES)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">summary</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -626,11 +522,11 @@ F-statistic: 2.235 on 1 and 23 DF,  p-value: 0.1485</code></pre>
 <section id="nun-in-r-klasse-2" class="title-slide slide level2 center">
 <h2>Nun in R (Klasse 2):</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>klasse_2 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">2</span>])</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_2, IQ <span class="sc">~</span> SES)</span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">summary</span>(model_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>klasse_2 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">2</span>])</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_2, IQ <span class="sc">~</span> SES)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">summary</span>(model_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -657,11 +553,11 @@ F-statistic: 1.637 on 1 and 5 DF,  p-value: 0.2569</code></pre>
 <section id="nun-in-r-klasse-3" class="title-slide slide level2 center">
 <h2>Nun in R (Klasse 3):</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>klasse_3 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">3</span>])</span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a>model_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_3, IQ <span class="sc">~</span> SES)</span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">summary</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>klasse_3 <span class="ot">&lt;-</span> nlschools <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="fu">filter</span>(class <span class="sc">%in%</span> <span class="fu">unique</span>(nlschools<span class="sc">$</span>class)[<span class="dv">3</span>])</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>model_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> klasse_3, IQ <span class="sc">~</span> SES)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="fu">summary</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -730,10 +626,6 @@ F-statistic: 1.427 on 1 and 3 DF,  p-value: 0.3181</code></pre>
 <li><p><strong>Fixed-Effects</strong> sind also die Effekte von den Prädiktoren die uns interessieren.</p></li>
 <li><p>Die Prädiktoren können in dem Modell aufgenommen werden, um dafür zu Kontrollieren, oder ihre “kombinierte” Effekte mit anderen Prädiktoen zu untersuchen.</p></li>
 </ul>
-</section>
-
-<section id="section" class="title-slide slide level2 center">
-<h2></h2>
 
 <div class="footer footer-default">
 <p><a href="https://josealanis.github.io/stats-website-template/">Fortgeschrittene statistische Methoden II</a></p>
