@@ -16,28 +16,100 @@ execute:
   freeze: auto
 ---
 
+## Modelschätzung
+
+```{r, error=TRUE, echo = TRUE}
+require(MASS)
+
+model_ses <- lm(data = nlschools, IQ ~ SES)
+summary(model_ses)
+```
+
 ## Modelvorhersahen
 
-```{r, error=TRUE, fig.width=5, fig.width=6, fig.align="center", echo = TRUE}
-require(MASS)
-require(ggplot2)
-
+```{r, error=TRUE, echo = TRUE}
+# beta 0 (Intercept)
 b0 = 10.163000
+# beta 1 (Steigung)
 b1 = 0.060084
-x = c(15, 25)
 
+# X-Werte für die erwartete Y-Werte geschätzt werden sollen
+x = 0:10
+
+# Schätzen wir die Y-Werte mit der Formel der Regression
 vorhersagen <- b0 + b1 * x
-vorhersagen_df <- data.frame(SES = x, IQ = vorhersagen)
 
-ggplot(data = nlschools, aes(x = SES, y = IQ)) +
-    geom_point(size = 0.8, alpha = 0.5, color = 'gray') +
-    geom_smooth(method = 'lm', alpha = 0.75) +
-    geom_point(data = vorhersagen_df, size = 6.0, color = 'red', shape = 8) +
-    theme_linedraw() +
-    coord_cartesian(ylim = c(0, 20)) +
-    labs(y = 'Test Score') +
-    theme(axis.text = element_text(size = 12))
+# Speichern wir die Ergebnisse in einer Tabelle
+vorhersagen_df <- data.frame(SES = x, IQ = round(vorhersagen, 3))
 ```
+
+## Visualisierung (1)
+
+```{r, error=TRUE, echo = TRUE, fig.width=5, fig.width=6, fig.align="center"}
+require(dplyr)
+
+intercept_0 <- vorhersagen_df %>%
+  filter(SES == 0)
+
+intercept_10 <- vorhersagen_df %>%
+  filter(SES == 10)
+
+require(ggplot2)
+require(ggrepel)
+pd <- position_jitter(width = 0.5)
+plot_reg <- ggplot(data = nlschools, 
+                   aes(x = SES, y = IQ, label = IQ)) +
+  geom_point(position = pd, alpha = 0.25) +
+  coord_cartesian(ylim = c(0, 20), xlim = c(0, 50)) +
+  theme_linedraw() +
+  theme(panel.grid = element_line(color = 'gray80'),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12)) +
+  geom_smooth(method = 'lm') +
+  # geom_line(data = vorhersagen, color = 'red', size = 1.0) +
+  geom_point(data = intercept_0,
+             size = 3, shape = 8, color = 'red') +
+  geom_point(data = intercept_10,
+             size = 3, shape = 8, color = 'red') +
+  geom_text_repel(data = intercept_0, 
+                  box.padding = 0.5, 
+                  hjust = "left",
+                  nudge_x = -10, nudge_y = -1) +
+    geom_text_repel(data = intercept_10, 
+                  box.padding = 0.5, 
+                  hjust = "left",
+                  nudge_x = -5, nudge_y = 2); plot_reg
+```
+
+## Visualisierung (2)
+
+```{r, error=TRUE, echo = TRUE, fig.width=5, fig.width=6, fig.align="center"}
+
+require(ggplot2)
+require(ggrepel)
+pd <- position_jitter(width = 0.5)
+plot_reg <- ggplot(data = nlschools, 
+                   aes(x = SES, y = IQ, label = IQ)) +
+  geom_point(position = pd, alpha = 0.25) +
+  coord_cartesian(ylim = c(0, 20), xlim = c(0, 50)) +
+  theme_linedraw() +
+  theme(panel.grid = element_line(color = 'gray80'),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 12)) +
+  geom_smooth(method = 'lm') +
+  geom_line(data = vorhersagen_df, color = 'red', linewidth = 1.0) +
+  geom_point(data = intercept_0, size = 3, shape = 8, color = 'red') +
+  geom_point(data = intercept_10, size = 3, shape = 8, color = 'red') +
+  geom_text_repel(data = intercept_0, 
+                  box.padding = 0.5, 
+                  hjust = "left",
+                  nudge_x = -10, nudge_y = -1) +
+    geom_text_repel(data = intercept_10, 
+                  box.padding = 0.5, 
+                  hjust = "left",
+                  nudge_x = -5, nudge_y = 2); plot_reg
+```
+
 
 ## Interpretation der Ergebnisse:
 
@@ -155,3 +227,5 @@ Es is wahrschienlich am sinnvollsten den Effekt von ses und Klassenzugehörigkei
 -   **Fixed-Effects** sind also die Effekte von den Prädiktoren die uns interessieren.
 
 -   Die Prädiktoren können in dem Modell aufgenommen werden, um dafür zu Kontrollieren, oder ihre "kombinierte" Effekte mit anderen Prädiktoen zu untersuchen.
+
+## 
