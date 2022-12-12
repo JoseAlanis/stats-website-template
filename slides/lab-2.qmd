@@ -41,20 +41,18 @@ ggplot(data = nlschools, aes(x = SES, y = IQ)) +
 
 ## Interpretation der Ergebnisse:
 
-- je höher SES, desto höher die Performanz der Schüler:innen.
-- Zusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben:
-  - Wenn SES um eine Einheit steigt, steigt die Performanz um  0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt).
-- Das Modell nimmt an, das der Effekt von SES auf die performance **konstant** (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet).
-- **Fix-effects** sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind).
+-   je höher SES, desto höher die Performanz der Schüler:innen.
+-   Zusätzlich können wir der Effekt von SES auf die Perfromanz genau beschreiben:
+    -   Wenn SES um eine Einheit steigt, steigt die Performanz um 0.06. Das sollte für alle Schüler:innen ungefähr so stimmen (wir haben keine Gruppen/Klassen berücksichtigt).
+-   Das Modell nimmt an, das der Effekt von SES auf die performance **konstant** (oder fix) ist. Das bedeutet, dass der geschätzte Effekt für alle Personen gleich ist (oder sein sollte) und nicht von Person zu Person variiert (oder sich nicht zwischen Personengruppen unterschiedet).
+-   **Fix-effects** sind die Effekte, von denen man ausgeht, dass in der Population vorliegen (stabil sind).
 
 ## Berücksichtigung der Gruppenzugehörigkeit (1)
 
-Lasst uns die Analyse wiederholen. Allerdings werden wir dabei berücksichtigen,
-dass die Daten der Schüler:innen aus drei verschiedenen Klassen stammen.
+Lasst uns die Analyse wiederholen. Allerdings werden wir dabei berücksichtigen, dass die Daten der Schüler:innen aus drei verschiedenen Klassen stammen.
 
-- In einem ersten Schritt filtern wir die Daten nach Klassen.
-- Danach können wir eine einfache Regression für jede Klasse berechnen und
-die Ergebnisse aus diesen Regressionen vergleichen.
+-   In einem ersten Schritt filtern wir die Daten nach Klassen.
+-   Danach können wir eine einfache Regression für jede Klasse berechnen und die Ergebnisse aus diesen Regressionen vergleichen.
 
 ## Betrachten wir die folgende Abbildung:
 
@@ -78,17 +76,15 @@ ggplot(data = erste_drei, aes(x = SES, y = IQ, color = class)) +
 
 ## Berücksichtigung der Gruppenzugehörigkeit (2)
 
-Aus unserer Analyse lässt sich nun ein $\beta_{0}$ parameter und ein $\beta_{1}$ parameter
-für jede gruppen Regression schätzen.
+Aus unserer Analyse lässt sich nun ein $\beta_{0}$ parameter und ein $\beta_{1}$ parameter für jede gruppen Regression schätzen.
 
-- Nennen wir diese $\beta_{0, j}$ und $\beta_{1, j}$. Der index $j$ bedeutet,
-dass jede klasse ihr eigenes $\beta_{0}$ bzw. $\beta_{1}$ hat.
+-   Nennen wir diese $\beta_{0, j}$ und $\beta_{1, j}$. Der index $j$ bedeutet, dass jede klasse ihr eigenes $\beta_{0}$ bzw. $\beta_{1}$ hat.
 
-- Wir können diese auch “ausschrieben":
+-   Wir können diese auch "ausschrieben":
 
-  - $\widehat{\beta_{0, 1}}$ und $\widehat{\beta_{1, 1}}$für Gruppe 1.
-  - $\widehat{\beta_{0, 2}}$ und $\widehat{\beta_{1, 2}}$für Gruppe 2.
-  - $\widehat{\beta_{0, 3}}$ und $\widehat{\beta_{1, 3}}$für Gruppe 3.
+    -   $\widehat{\beta_{0, 1}}$ und $\widehat{\beta_{1, 1}}$für Gruppe 1.
+    -   $\widehat{\beta_{0, 2}}$ und $\widehat{\beta_{1, 2}}$für Gruppe 2.
+    -   $\widehat{\beta_{0, 3}}$ und $\widehat{\beta_{1, 3}}$für Gruppe 3.
 
 ## Nun in R (Klasse 1):
 
@@ -119,44 +115,43 @@ klasse_3 <- nlschools %>%
 model_3 <- lm(data = klasse_3, IQ ~ SES)
 summary(model_3)
 ```
+
 ## Zwischenfazit (1)
 
-Bei der Betrachtung von  und  stellen wir fest, dass es deutliche Unterschiede
-zwischen den Klassen gibt hinsichtlich:
+Bei der Betrachtung von und stellen wir fest, dass es deutliche Unterschiede zwischen den Klassen gibt hinsichtlich:
 
-- deren $\beta_{0, j}$. Also deutliche Unterschiede in deren "Ausgangsleistungsniveaus".
+-   deren $\beta_{0, j}$. Also deutliche Unterschiede in deren "Ausgangsleistungsniveaus".
 
-  - Woraun kann man dies erkennen?
+    -   Woraun kann man dies erkennen?
 
-    - $\beta_{0, j}$ ist der y-Achsenabschnitte, also die erwartete performance wenn SES = 0 ist.
+        -   $\beta_{0, j}$ ist der y-Achsenabschnitte, also die erwartete performance wenn SES = 0 ist.
 
-- den Zusammenhang zwischen SES und Perfromanz.
+-   den Zusammenhang zwischen SES und Perfromanz.
 
-  - dies lässt sich in unterschiedlichen $\beta_{1, j}$ ablesen (die geschätzte Steigung der Modelle).
+    -   dies lässt sich in unterschiedlichen $\beta_{1, j}$ ablesen (die geschätzte Steigung der Modelle).
 
 ## Zwischenfazit (2)
 
-Die Zugehörigkeit zu einer Klasse **verändert** also **den Effekt** von SES (zumindest deskriptiv).
-In einer einfachen linearen Regression könnten wir dies nicht sehen, weil das Modell “naiv” gegenüber die Klassenzugehörigkeit der Personen ist.
+Die Zugehörigkeit zu einer Klasse **verändert** also **den Effekt** von SES (zumindest deskriptiv). In einer einfachen linearen Regression könnten wir dies nicht sehen, weil das Modell "naiv" gegenüber die Klassenzugehörigkeit der Personen ist.
 
 Es is wahrschienlich am sinnvollsten den Effekt von ses und Klassenzugehörigkeit (Ein *fixer* between-subjects Faktor mit 3 Stufen: Klasse 1, Klasse 2, Klasse 3) in einem gemeinsammen Modell zu untersuchen:
 
-- Bei nur drei Klassen könnten wir Klassenzugehörigkeit als Kontrollvariable im Modell aufnehmen:
+-   Bei nur drei Klassen könnten wir Klassenzugehörigkeit als Kontrollvariable im Modell aufnehmen:
 
-  - `lm(data = erste_drei, IQ ~ class + SES)`
+    -   `lm(data = erste_drei, IQ ~ class + SES)`
 
-- Dies würde für die Abhängigkeiten, die auf die Klassenzugehörigkeit zurück gehen kontrollieren.
+-   Dies würde für die Abhängigkeiten, die auf die Klassenzugehörigkeit zurück gehen kontrollieren.
 
-  - Aber: Wenn wir keine Interaktion zwischen Klasse und ses zulassen, würde unser Modell nur für die Unterschiede der Klassen kontrollieren. Es würde also die Mittelwertsunterschiede der Klassen “heraus rechnen”.
+    -   Aber: Wenn wir keine Interaktion zwischen Klasse und ses zulassen, würde unser Modell nur für die Unterschiede der Klassen kontrollieren. Es würde also die Mittelwertsunterschiede der Klassen "heraus rechnen".
 
-- Alternativ könnten wir Klassenzugehörigkeit als einen Moderator (Interaktion zwischen `class` und `SES`) im Modell aufnehmen:
+-   Alternativ könnten wir Klassenzugehörigkeit als einen Moderator (Interaktion zwischen `class` und `SES`) im Modell aufnehmen:
 
-  - Dies würde uns erlauben die unterschiedliche $\beta_{1, j}$ zu untersuchen.
+    -   Dies würde uns erlauben die unterschiedliche $\beta_{1, j}$ zu untersuchen.
 
 ## Zwischenfazit (3)
 
-- **Fixed-Effects Modelle** sind Modelle in denen Prädiktoren aufgenommen werden um, deren Effekte auf einenm Kriterium zu unterscuchen.
+-   **Fixed-Effects Modelle** sind Modelle in denen Prädiktoren aufgenommen werden um, deren Effekte auf einenm Kriterium zu unterscuchen.
 
-- **Fixed-Effects** sind also die Effekte von den Prädiktoren die uns interessieren.
+-   **Fixed-Effects** sind also die Effekte von den Prädiktoren die uns interessieren.
 
-- Die Prädiktoren können in dem Modell aufgenommen werden, um dafür zu Kontrollieren, oder ihre “kombinierte” Effekte mit anderen Prädiktoen zu untersuchen.
+-   Die Prädiktoren können in dem Modell aufgenommen werden, um dafür zu Kontrollieren, oder ihre "kombinierte" Effekte mit anderen Prädiktoen zu untersuchen.
