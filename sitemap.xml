@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://josealanis.github.io/stats-website-template/computing-pipelines.html</loc>
-    <lastmod>2023-01-15T01:20:40.658Z</lastmod>
+    <loc>https://josealanis.github.io/stats-website-template/project-description.html</loc>
+    <lastmod>2023-01-22T01:20:41.467Z</lastmod>
   </url>
   <url>
     <loc>https://josealanis.github.io/stats-website-template/course-links.html</loc>
-    <lastmod>2023-01-15T01:20:42.778Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/project-description.html</loc>
-    <lastmod>2023-01-15T01:20:43.550Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/index.html</loc>
-    <lastmod>2023-01-15T01:20:44.370Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/course-faq.html</loc>
-    <lastmod>2023-01-15T01:20:44.742Z</lastmod>
+    <lastmod>2023-01-22T01:20:42.575Z</lastmod>
   </url>
   <url>
     <loc>https://josealanis.github.io/stats-website-template/weeks/woche-1.html</loc>
-    <lastmod>2023-01-15T01:20:45.186Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/project-tips-resources.html</loc>
-    <lastmod>2023-01-15T01:20:45.862Z</lastmod>
+    <lastmod>2023-01-22T01:20:43.019Z</lastmod>
   </url>
   <url>
     <loc>https://josealanis.github.io/stats-website-template/course-syllabus.html</loc>
-    <lastmod>2023-01-15T01:20:46.542Z</lastmod>
+    <lastmod>2023-01-22T01:20:43.731Z</lastmod>
   </url>
   <url>
-    <loc>https://josealanis.github.io/stats-website-template/slides/lab-1.html</loc>
-    <lastmod>2023-01-15T01:20:51.482Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/slides/lab-2.html</loc>
-    <lastmod>2023-01-15T01:20:55.202Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/course-overview.html</loc>
-    <lastmod>2023-01-15T01:20:56.254Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/computing-troubleshooting.html</loc>
-    <lastmod>2023-01-15T01:20:56.650Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/course-support.html</loc>
-    <lastmod>2023-01-15T01:20:57.466Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/computing-access.html</loc>
-    <lastmod>2023-01-15T01:20:57.850Z</lastmod>
-  </url>
-  <url>
-    <loc>https://josealanis.github.io/stats-website-template/r-book/index.html</loc>
-    <lastmod>2023-01-15T01:20:58.298Z</lastmod>
+    <loc>https://josealanis.github.io/stats-website-template/index.html</loc>
+    <lastmod>2023-01-22T01:20:44.627Z</lastmod>
   </url>
   <url>
     <loc>https://josealanis.github.io/stats-website-template/LICENSE.html</loc>
-    <lastmod>2023-01-15T01:20:58.870Z</lastmod>
+    <lastmod>2023-01-22T01:20:45.215Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/slides/lab-2.html</loc>
+    <lastmod>2023-01-22T01:20:49.547Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/slides/lab-1.html</loc>
+    <lastmod>2023-01-22T01:20:54.543Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/computing-troubleshooting.html</loc>
+    <lastmod>2023-01-22T01:20:55.595Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/computing-pipelines.html</loc>
+    <lastmod>2023-01-22T01:20:56.207Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/course-faq.html</loc>
+    <lastmod>2023-01-22T01:20:56.591Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/computing-access.html</loc>
+    <lastmod>2023-01-22T01:20:56.959Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/r-book/index.html</loc>
+    <lastmod>2023-01-22T01:20:57.803Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/course-overview.html</loc>
+    <lastmod>2023-01-22T01:20:58.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/project-tips-resources.html</loc>
+    <lastmod>2023-01-22T01:20:58.895Z</lastmod>
+  </url>
+  <url>
+    <loc>https://josealanis.github.io/stats-website-template/course-support.html</loc>
+    <lastmod>2023-01-22T01:20:59.339Z</lastmod>
   </url>
 </urlset>
